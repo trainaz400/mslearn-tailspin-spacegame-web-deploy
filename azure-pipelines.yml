@@ -19,10 +19,7 @@ stages:
   jobs: 
   - job: 'Build'
     displayName: 'Build job'
-    pool:
-      vmImage: 'ubuntu-18.04'
-      demands:
-      - npm
+    pool: 'linuxagentpool'
 
     variables:
       wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
@@ -85,8 +82,7 @@ stages:
     )
   jobs:
   - deployment: Deploy
-    pool:
-      vmImage: 'ubuntu-18.04'
+    pool: 'linuxagentpool'
     environment: dev
     variables:
     - group: Release
@@ -109,8 +105,7 @@ stages:
   #condition: eq(variables['Build.Reason'], 'Schedule')
   jobs:
   - deployment: Deploy
-    pool:
-      vmImage: 'ubuntu-18.04'
+    pool: 'linuxagentpool'
     environment: test
     variables:
     - group: 'Release'
@@ -132,8 +127,7 @@ stages:
   dependsOn: Test
   jobs:
   - deployment: Deploy
-    pool:
-      vmImage: 'ubuntu-18.04'
+    pool: 'linuxagentpool'
     environment: staging
     variables:
     - group: 'Release'
